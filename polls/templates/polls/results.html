@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results Page</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/bootstrap/css/bootstrap.min.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'font-awesome/css/font-awesome.min.css' %}" />
+
+    <script type="text/javascript" src="{% static 'polls/js/jquery-1.10.2.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'polls/bootstrap/js/bootstrap.min.js'%}"></script>
+</head>
+<body>
+<div class="container">
+
+<div class="page-header">
+    <h1>{{ question.question_text }}</h1>
+</div>
+
+<!-- Poll - START -->
+<div class="container">
+    <div class="col-md-0"></div>
+
+    <div class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="fa fa-line-chart"></span> Select Appropriate Options</h3>
+            </div>
+                <ul class="list-group">
+                    {% for choice in question.choice_set.all %}
+                    <li class="list-group-item">
+                        <div class="radio">
+                            <label>
+                               {{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}
+                            </label>
+                        </div>
+                    </li>
+                {% endfor %}
+                </ul>
+
+            <div class="panel-footer text-center">
+
+                    <a href="{%url 'polls:index' %}" class="btn btn-primary btn-block btn-sm">Go To Home</a>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        margin-top: 20px;
+    }
+
+    .panel-body:not(.two-col) {
+        padding: 0px;
+    }
+
+    .glyphicon {
+        margin-right: 5px;
+    }
+
+    .glyphicon-new-window {
+        margin-left: 5px;
+    }
+
+    .panel-body .radio, .panel-body .checkbox {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .panel-body .list-group {
+        margin-bottom: 0;
+    }
+
+    .margin-bottom-none {
+        margin-bottom: 0;
+    }
+
+    .panel-body .radio label, .panel-body .checkbox label {
+        display: block;
+    }
+</style>
+
+<!-- Poll - END -->
+
+</div>
+<!--
+<h1>{{ question.question_text }}</h1>
+<ul>
+{% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }}</li>
+{% endfor %}
+</ul> -->
+
+
+</body>
+</html>
